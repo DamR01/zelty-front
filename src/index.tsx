@@ -7,8 +7,8 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import Error from "./components/Error";
 import { Checkout } from "./pages/Checkout";
+import Error from "./pages/Error";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

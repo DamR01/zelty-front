@@ -1,4 +1,4 @@
-import { BadgeStyled } from "./styles/Badge.styled";
+import { BadgeStyled } from "../styles/Badge.styled";
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;

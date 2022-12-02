@@ -1,6 +1,6 @@
-import { Input } from "../components/Input";
-import { Cart } from "../components/Cart";
 import { CheckoutStyled } from "./Checkout.styled";
+import { Input } from "../components/Atoms/Input";
+import { Cart } from "../components/Organism/Cart";
 export const Checkout = () => {
   return (
     <CheckoutStyled>

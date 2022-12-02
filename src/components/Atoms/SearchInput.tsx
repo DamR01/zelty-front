@@ -1,4 +1,4 @@
-import { SearchInputStyled } from "./styles/SearchInput.styled";
+import { SearchInputStyled } from "../styles/SearchInput.styled";
 
 export const SearchInput = () => {
   return (

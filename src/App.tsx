@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import logo from "./logo.svg";
-import { SearchInput } from "./components/SearchInput";
 import { AppStyled } from "./App.styled";
-import { Cart } from "./components/Cart";
-import { Menu } from "./components/Menu";
+
 import { authentification } from "./api/auth";
 import { useQuery } from "react-query";
 import { authTokenState } from "./atoms/auth.atom";
 import { useRecoilState } from "recoil";
-import { Card } from "./components/Card";
+
 import { getProducts } from "./api/getProducts";
+import { SearchInput } from "./components/Atoms/SearchInput";
+import { Menu } from "./components/Organism/Menu";
+import { Card } from "./components/Organism/Card";
+import { Cart } from "./components/Organism/Cart";
 
 function App() {
   const [, setAuthToken] = useRecoilState(authTokenState);

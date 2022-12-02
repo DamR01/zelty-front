@@ -1,4 +1,4 @@
-import { StyledInput } from "./styles/Input.styled";
+import { StyledInput } from "../styles/Input.styled";
 
 export const Input = () => {
   return (

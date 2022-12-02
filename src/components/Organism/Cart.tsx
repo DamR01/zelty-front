@@ -1,6 +1,6 @@
-import { CartStyled } from "./styles/Cart.styled";
-import { Badge } from "./Badge";
-import { Button } from "./Button";
+import { CartStyled } from "../styles/Cart.styled";
+import { Badge } from "../Atoms/Badge";
+import { Button } from "../Atoms/Button";
 
 export const Cart = () => {
   return (

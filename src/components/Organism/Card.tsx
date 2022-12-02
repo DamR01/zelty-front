@@ -1,5 +1,5 @@
-import { CardStyled } from "./styles/Card.styled";
-import { Button } from "./Button";
+import { CardStyled } from "../styles/Card.styled";
+import { Button } from "../Atoms/Button";
 
 export const Card = () => {
   return (
