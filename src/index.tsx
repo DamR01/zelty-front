@@ -8,18 +8,37 @@ import {
     QueryClientProvider,
 } from 'react-query'
 import { RecoilRoot } from "recoil";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+
+import Error from "./components/Error";
+import {Card} from "./components/Card";
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
 const queryClient = new QueryClient()
+
+const router = createBrowserRouter([
+    {
+        path: "/",
+        element: <App/>,
+        errorElement: <Error />,
+    },
+   {
+    path: "/checkout",
+       element: <Card/>
+    }
+]);
+
 root.render(
   <React.StrictMode>
       <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-        <App />
+          <RouterProvider router={router} />
       </QueryClientProvider>
       </RecoilRoot>
+
   </React.StrictMode>
 );
 
