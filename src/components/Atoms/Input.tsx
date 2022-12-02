@@ -1,9 +1,20 @@
 import { StyledInput } from "../styles/Input.styled";
+import { HTMLInputTypeAttribute } from "react";
 
-export const Input = () => {
+interface InputProps {
+  type: HTMLInputTypeAttribute;
+  placeholder: string;
+  register: any;
+}
+export const Input = ({
+  placeholder,
+  type,
+  register,
+  ...props
+}: InputProps) => {
   return (
     <StyledInput>
-      <input type="text" placeholder="name" />
+      <input type={type} placeholder={placeholder} {...register} {...props} />
     </StyledInput>
   );
 };

@@ -2,7 +2,10 @@ import { CartStyled } from "../styles/Cart.styled";
 import { Badge } from "../Atoms/Badge";
 import { Button } from "../Atoms/Button";
 
-export const Cart = () => {
+interface CartProps {
+  onSubmit?(): void;
+}
+export const Cart = ({ onSubmit }: CartProps) => {
   return (
     <CartStyled className="zelty-restaurant__cart">
       <div className="zelty-restaurant__cart__head">
@@ -22,7 +25,7 @@ export const Cart = () => {
           <span className="label">Total</span>
           <span className="price">0 €</span>
         </div>
-        <Button disabled>Commander</Button>
+        <Button onClick={onSubmit}>Commander</Button>
       </div>
     </CartStyled>
   );

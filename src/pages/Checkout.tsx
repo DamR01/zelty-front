@@ -1,20 +1,41 @@
 import { CheckoutStyled } from "./Checkout.styled";
 import { Input } from "../components/Atoms/Input";
 import { Cart } from "../components/Organism/Cart";
+import { useForm } from "react-hook-form";
 export const Checkout = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data: any) => console.log("data", data);
   return (
-    <CheckoutStyled>
-      <div className="zelty-checkout__customer-container">
-        <div className="zelty-checkout__customer-input">
-          <Input />
-          <Input />
+    <form>
+      <CheckoutStyled>
+        <div className="zelty-checkout__customer-container">
+          <div className="zelty-checkout__customer-input">
+            <Input
+              type="text"
+              placeholder="Prénom"
+              register={{ ...register("firstName") }}
+            />
+            <Input
+              type="email"
+              placeholder="Email"
+              register={{ ...register("email") }}
+            />
+          </div>
+          <div className="zelty-checkout__customer-input">
+            <Input
+              type="text"
+              placeholder="Nom"
+              register={{ ...register("name") }}
+            />
+            <Input
+              type="phone"
+              placeholder="Téléphone"
+              register={{ ...register("phone") }}
+            />
+          </div>
         </div>
-        <div className="zelty-checkout__customer-input">
-          <Input />
-          <Input />
-        </div>
-      </div>
-      <Cart />
-    </CheckoutStyled>
+        <Cart onSubmit={handleSubmit(onSubmit)} />
+      </CheckoutStyled>
+    </form>
   );
 };
