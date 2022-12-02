@@ -1,10 +1,8 @@
-
 import axios from "axios";
-import {authentification} from "./auth";
-
+import { authentification } from "./auth";
 
 const apiInstance = axios.create({
-    baseURL: process.env.PUBLIC_API_URL,
+  baseURL: process.env.PUBLIC_API_URL,
 });
 
 /**
@@ -14,23 +12,21 @@ const apiInstance = axios.create({
  * ignore it to avoid infinite loop
  */
 apiInstance.interceptors.request.use(async (request) => {
-    //set for every request the params with the current lang
-    request.params = {
-        ...request.params,
-    };
+  //set for every request the params with the current lang
+  request.params = {
+    ...request.params,
+  };
 
-    if (request.url?.includes("authenticate")) return request;
+  if (request.url?.includes("authenticate")) return request;
 
-    const { Authorization } = apiInstance.defaults.headers.common as {
-        Authorization: string;
-    };
+  const { Authorization } = apiInstance.defaults.headers.common as {
+    Authorization: string;
+  };
 
-    if (Authorization) {
-        await authentification();
-
-    }
-    return request;
+  if (Authorization) {
+    await authentification();
+  }
+  return request;
 });
-
 
 export default apiInstance;

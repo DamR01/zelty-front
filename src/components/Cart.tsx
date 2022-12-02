@@ -6,9 +6,7 @@ export const Cart = () => {
   return (
     <CartStyled className="zelty-restaurant__cart">
       <div className="zelty-restaurant__cart__head">
-        <Badge active>
-          Sur place
-        </Badge>
+        <Badge active>Sur place</Badge>
         <div className="zelty-restaurant__cart__head__table">
           <h3>Table</h3>
           <span>03</span>

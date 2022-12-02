@@ -1,44 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import {
-    QueryClient,
-    QueryClientProvider,
-} from 'react-query'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Error from "./components/Error";
-import {Card} from "./components/Card";
+import { Checkout } from "./pages/Checkout";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <App/>,
-        errorElement: <Error />,
-    },
-   {
+  {
+    path: "/",
+    element: <App />,
+    errorElement: <Error />,
+  },
+  {
     path: "/checkout",
-       element: <Card/>
-    }
+    element: <Checkout />,
+  },
 ]);
 
 root.render(
   <React.StrictMode>
-      <RecoilRoot>
+    <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </QueryClientProvider>
-      </RecoilRoot>
-
+    </RecoilRoot>
   </React.StrictMode>
 );
 

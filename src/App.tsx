@@ -1,29 +1,26 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import { SearchInput } from "./components/SearchInput";
 import { AppStyled } from "./App.styled";
 import { Cart } from "./components/Cart";
 import { Menu } from "./components/Menu";
-import {authentification} from "./api/auth";
-import {useQuery} from "react-query";
-import {authTokenState} from "./atoms/auth.atom";
-import {useRecoilState} from "recoil";
-import {Card} from "./components/Card";
-import {getProducts} from "./api/getProducts";
+import { authentification } from "./api/auth";
+import { useQuery } from "react-query";
+import { authTokenState } from "./atoms/auth.atom";
+import { useRecoilState } from "recoil";
+import { Card } from "./components/Card";
+import { getProducts } from "./api/getProducts";
 
 function App() {
+  const [, setAuthToken] = useRecoilState(authTokenState);
+  const { data: access_token } = useQuery(["auth"], authentification);
 
-    const [, setAuthToken] = useRecoilState(authTokenState);
-    const {data: access_token} = useQuery(["auth"], authentification)
+  const { data: products } = useQuery(["products"], getProducts);
 
-    const {data: products} = useQuery(["products"], getProducts)
-
-console.log('products', products);
-    useEffect(()=> {
-        setAuthToken(access_token)
-    },[access_token])
-
-
+  console.log("products", products);
+  useEffect(() => {
+    setAuthToken(access_token);
+  }, [access_token]);
 
   return (
     <AppStyled className="zelty-restaurant">
@@ -35,8 +32,9 @@ console.log('products', products);
           <SearchInput />
           <Menu />
 
-          <div className="zelty-restaurant__products">Liste des produits
-              <Card/>
+          <div className="zelty-restaurant__products">
+            Liste des produits
+            <Card />
           </div>
         </div>
         <div className="zelty-restaurant__content__right">
