@@ -4,8 +4,14 @@ import { SearchInput } from "./components/SearchInput";
 import { AppStyled } from "./App.styled";
 import { Cart } from "./components/Cart";
 import { Menu } from "./components/Menu";
+import {authentification} from "./api/auth";
+import {useQuery} from "react-query";
 
 function App() {
+
+    const {data: access_token} = useQuery(["auth"], authentification)
+
+    console.log('access_token',access_token );
   return (
     <AppStyled className="zelty-restaurant">
       <header>
