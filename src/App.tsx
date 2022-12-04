@@ -19,7 +19,6 @@ function App() {
 
   const { data: products } = useQuery(["products"], getProducts);
 
-  console.log("products", products);
   useEffect(() => {
     setAuthToken(access_token);
   }, [access_token]);
@@ -36,7 +35,7 @@ function App() {
 
           <div className="zelty-restaurant__products">
             Liste des produits
-            <Card />
+            <Card products={products} />
           </div>
         </div>
         <div className="zelty-restaurant__content__right">

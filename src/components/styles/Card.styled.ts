@@ -6,7 +6,7 @@ export const CardStyled = styled.div`
   padding: 1rem 0.8rem;
   box-sizing: border-box;
   box-shadow: 0 0 15px 9px rgba(0, 0, 0, 0.03);
-  width: 50%;
+  width: 100%;
 
   .zelty-card {
     &__container {

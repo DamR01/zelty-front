@@ -1,32 +1,13 @@
 import axios from "axios";
-import { authentification } from "./auth";
+
+const token =
+  "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Iks3VVdOY1g2QWJjYnNNTkVwTi1UOSJ9.eyJpc3MiOiJodHRwczovL2Rldi01ZmVtc3psM2Z2N3BseTNsLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJvZUsweXVMYVJWSDB0YzFDbjZmOHFXeEhWakF6RGhyTUBjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9tcmhoanUybXA4LmV4ZWN1dGUtYXBpLmV1LXdlc3QtMS5hbWF6b25hd3MuY29tIiwiaWF0IjoxNjcwMTgzMTU2LCJleHAiOjE2NzAyNjk1NTYsImF6cCI6Im9lSzB5dUxhUlZIMHRjMUNuNmY4cVd4SFZqQXpEaHJNIiwic2NvcGUiOiJyZWFkOmNhdGFsb2ciLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.huitwz2eeifl2vXokdm38zpulwuv_asWWv0SpRzDUu0FE7XOlfu-W5WdrMDuNry20blrPshJm8VeI6v2My32ypABu8YkAe1MJIhaUiCis3_o3tfVAl4-VecoRghA3GYwLYi9TmQhrP5LqPbYUBrhhXs6ukgB_Ff0XPzsEA7xdxlqhLbLEROgr66GojdtOtNrf1DY73-koHGhX3E3I1aKTdIh_M7ba7Tq3a3ZKeZHzAlESLQbaYICN0fKqzxgIGXmWwElBtCPhnAw2_fUu_2h1k6ObAfl7DNMsics1tIGd5Oj_IpxZ7PhMlWV2-iEWsqmO5oms-jKQIMDQWLPKlnLsg";
 
 const apiInstance = axios.create({
-  baseURL: process.env.PUBLIC_API_URL,
+  baseURL: "https://mrhhju2mp8.execute-api.eu-west-1.amazonaws.com",
+  timeout: 1000,
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
 });
-
-/**
- * Before every api call, check if the token is expired
- * Renew it before the call if needed
- * if the request is the token's request itself(authenticate()),
- * ignore it to avoid infinite loop
- */
-apiInstance.interceptors.request.use(async (request) => {
-  //set for every request the params with the current lang
-  request.params = {
-    ...request.params,
-  };
-
-  if (request.url?.includes("authenticate")) return request;
-
-  const { Authorization } = apiInstance.defaults.headers.common as {
-    Authorization: string;
-  };
-
-  if (Authorization) {
-    await authentification();
-  }
-  return request;
-});
-
 export default apiInstance;
