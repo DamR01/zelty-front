@@ -2,7 +2,6 @@ import { CardStyled } from "../styles/Card.styled";
 import { Button } from "../Atoms/Button";
 import { Product } from "../../helpers/product.interface";
 
-import { useState } from "react";
 import localOrderState from "../../atoms/localOrder.atom";
 import { useSetRecoilState } from "recoil";
 
@@ -15,7 +14,6 @@ export const Card = ({ products }: CardProps) => {
   const addProduct = (product: Product) => {
     setLocalOrder((prevState) => [...prevState, product]);
   };
-
 
   return (
     <>

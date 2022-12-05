@@ -19,18 +19,27 @@ function App() {
   const { data: access_token } = useQuery(["auth"], authentification);
   localStorage.setItem("access_token", access_token?.access_token);
 
-  const { data: products } = useQuery(["products"], getProducts);
-  const { data: menus } = useQuery(["menus"], getMenus);
-  const { data: options } = useQuery(["options"], getOptions);
-
-  const productWithMenu = products?.map((item: Product) => {
-    const menuName = find(menus, ["id", item.menuId]);
-
-    return {
-      ...item,
-      menuName: menuName.name,
-    };
+  const token = localStorage.getItem("access_token");
+  const { data: products } = useQuery(["products"], getProducts, {
+    enabled: !!token,
   });
+  const { data: menus } = useQuery(["menus"], getMenus, {
+    enabled: !!token,
+  });
+  const { data: options } = useQuery(["options"], getOptions, {
+    enabled: !!token,
+  });
+
+  const productWithMenu =
+    products &&
+    products?.map((item: Product) => {
+      const menuName = menus && find(menus, ["id", item.menuId]);
+
+      return {
+        ...item,
+        menuName: menuName.name,
+      };
+    });
 
   return (
     <AppStyled className="zelty-restaurant">
@@ -41,9 +50,8 @@ function App() {
         <div className="zelty-restaurant__content__left">
           <SearchInput />
           <Menu />
-
+          Liste des produits
           <div className="zelty-restaurant__products">
-            Liste des produits
             {productWithMenu && <Card products={productWithMenu} />}
           </div>
         </div>
