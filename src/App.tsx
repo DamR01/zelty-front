@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import logo from "./logo.svg";
 import { AppStyled } from "./App.styled";
 
@@ -12,6 +12,8 @@ import { Card } from "./components/Organism/Card";
 import { Cart } from "./components/Organism/Cart";
 import { getMenus } from "./api/getMenus";
 import { getOptions } from "./api/getOptions";
+import { Product } from "./helpers/product.interface";
+import { find, flatten } from "lodash";
 
 function App() {
   const { data: access_token } = useQuery(["auth"], authentification);
@@ -20,6 +22,15 @@ function App() {
   const { data: products } = useQuery(["products"], getProducts);
   const { data: menus } = useQuery(["menus"], getMenus);
   const { data: options } = useQuery(["options"], getOptions);
+
+  const productWithMenu = products?.map((item: Product) => {
+    const menuName = find(menus, ["id", item.menuId]);
+
+    return {
+      ...item,
+      menuName: menuName.name,
+    };
+  });
 
   return (
     <AppStyled className="zelty-restaurant">
@@ -33,7 +44,7 @@ function App() {
 
           <div className="zelty-restaurant__products">
             Liste des produits
-            {products && <Card products={products} />}
+            {productWithMenu && <Card products={productWithMenu} />}
           </div>
         </div>
         <div className="zelty-restaurant__content__right">

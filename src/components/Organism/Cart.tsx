@@ -24,7 +24,7 @@ export const Cart = ({ onSubmit }: CartProps) => {
         </div>
       </div>
       <div className="zelty-restaurant__cart__items">
-        {!localOrder ? (
+        {!localOrder.length ? (
           <div className="zelty-restaurant__cart__items__empty">
             Aucun produit dans le panier 🥺
           </div>
