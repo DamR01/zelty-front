@@ -13,7 +13,7 @@ import { Cart } from "./components/Organism/Cart";
 import { getMenus } from "./api/getMenus";
 import { getOptions } from "./api/getOptions";
 import { Product } from "./helpers/product.interface";
-import { find, flatten } from "lodash";
+import { find } from "lodash";
 
 function App() {
   const { data: access_token } = useQuery(["auth"], authentification);

@@ -29,7 +29,7 @@ export const Card = ({ products }: CardProps) => {
               height="100px"
               alt={product.name}
             />
-            <p>{product.description}</p>
+            <p className="zelty-card__description">{product.description}</p>
             <Button onClick={() => addProduct(product)}>Choisir</Button>
           </div>
         </CardStyled>

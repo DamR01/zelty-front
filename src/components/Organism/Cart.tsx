@@ -4,7 +4,6 @@ import { Button } from "../Atoms/Button";
 import { useRecoilValue } from "recoil";
 import localOrderState from "../../atoms/localOrder.atom";
 import { convertPrice } from "../../utils/convertPrice";
-import { sum } from "lodash";
 
 interface CartProps {
   onSubmit?(): void;
