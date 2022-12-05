@@ -2,6 +2,7 @@ import { CheckoutStyled } from "./Checkout.styled";
 import { Input } from "../components/Atoms/Input";
 import { Cart } from "../components/Organism/Cart";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 export const Checkout = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data: any) => console.log("data", data);

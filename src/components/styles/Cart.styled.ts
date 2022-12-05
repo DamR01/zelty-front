@@ -28,6 +28,17 @@ export const CartStyled = styled.div`
       }
     }
     &__items {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 0.5rem;
+      &__container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      }
+      &__label {
+        margin-left: 0.5rem;
+      }
       &__empty {
         text-align: center;
         padding: 2rem 0;
