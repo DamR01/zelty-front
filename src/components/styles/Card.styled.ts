@@ -12,12 +12,19 @@ export const CardStyled = styled.div`
     box-shadow: 0 0 15px 9px var(--primary);
   }
 
+  @media (max-width: 769px) {
+    h3 {
+      margin-top: 2rem;
+    }
+  }
+
   .zelty-card {
     &__container {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      position: relative;
     }
 
     &__description {
@@ -27,6 +34,24 @@ export const CardStyled = styled.div`
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       white-space: normal;
+    }
+
+    &__tag-price {
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background-color: var(--primary);
+      color: white;
+      font-size: 0.7rem;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.4rem;
     }
   }
 `;

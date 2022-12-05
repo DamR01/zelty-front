@@ -4,6 +4,7 @@ import { Product } from "../../helpers/product.interface";
 
 import localOrderState from "../../atoms/localOrder.atom";
 import { useSetRecoilState } from "recoil";
+import { convertPrice } from "../../utils/convertPrice";
 
 interface CardProps {
   products: Product[];
@@ -21,6 +22,10 @@ export const Card = ({ products }: CardProps) => {
         <CardStyled key={product.id}>
           <div className="zelty-card__container">
             <h3>{product.name}</h3>
+            <div className="zelty-card__tag-price">
+              {convertPrice(product.price)}
+            </div>
+
             <img
               src={product.image}
               width="100px"
@@ -28,7 +33,13 @@ export const Card = ({ products }: CardProps) => {
               alt={product.name}
             />
             <p className="zelty-card__description">{product.description}</p>
-            <Button onClick={() => addProduct(product)}>Choisir</Button>
+
+            <Button
+              onClick={() => addProduct(product)}
+              disabled={product.sold_out}
+            >
+              Choisir
+            </Button>
           </div>
         </CardStyled>
       ))}
