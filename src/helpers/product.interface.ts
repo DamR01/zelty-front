@@ -7,4 +7,5 @@ export interface Product {
   price: number; // Le prix en centimes
   available_options: string[]; // Les options disponibles
   sold_out: boolean; // Le produit n'est pas en stock
+  quantity: number;
 }

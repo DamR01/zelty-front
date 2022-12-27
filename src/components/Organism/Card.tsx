@@ -3,8 +3,9 @@ import { Button } from "../Atoms/Button";
 import { Product } from "../../helpers/product.interface";
 
 import localOrderState from "../../atoms/localOrder.atom";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { convertPrice } from "../../utils/convertPrice";
+import { find } from "lodash";
 
 interface CardProps {
   products: Product[];
@@ -12,7 +13,17 @@ interface CardProps {
 
 export const Card = ({ products }: CardProps) => {
   const setLocalOrder = useSetRecoilState(localOrderState);
-  const addProduct = (product: Product) => {
+  const localOrder = useRecoilValue(localOrderState);
+
+  console.log("localOrder", localOrder);
+  const addProduct = (product: Product, quantity = 1) => {
+    const productAlreadyInBasket = find(localOrder, ["id", product.id]);
+
+    if (productAlreadyInBasket) {
+      product.quantity = quantity + 1;
+    }
+    console.log("productAlreadyInBasket", productAlreadyInBasket);
+
     setLocalOrder((prevState) => [...prevState, product]);
   };
 

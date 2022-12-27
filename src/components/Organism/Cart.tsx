@@ -61,7 +61,9 @@ export const Cart = ({ onSubmit }: CartProps) => {
           <span className="label">Total</span>
           <span className="price">{convertPrice(totalBasket)}</span>
         </div>
-        <Button onClick={handleSubmitOrder}>Commander</Button>
+        <Button onClick={handleSubmitOrder} disabled={!localOrder.length}>
+          Commander
+        </Button>
       </div>
     </CartStyled>
   );

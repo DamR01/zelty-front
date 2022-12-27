@@ -1,9 +1,17 @@
 import { SearchInputStyled } from "../styles/SearchInput.styled";
 
-export const SearchInput = () => {
+interface SearchInputProps {
+  onSearch: (text: string) => void;
+}
+
+export const SearchInput = ({ onSearch }: SearchInputProps) => {
   return (
     <SearchInputStyled className="zelty-restaurant__search">
-      <input type="search" placeholder="Rechercher un produit..." />
+      <input
+        type="text"
+        placeholder="Rechercher un produit..."
+        onChange={({ target: { value } }) => onSearch(value)}
+      />
     </SearchInputStyled>
   );
 };

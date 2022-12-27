@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import { AppStyled } from "./App.styled";
 
@@ -41,6 +41,19 @@ function App() {
       };
     });
 
+  const [catalog, setCatalog] = useState(productWithMenu);
+
+  const onSearch = (value: string) => {
+    const tinyValue = value.toLowerCase();
+
+    const valueSearch = productWithMenu.filter((product: Product) => {
+      const productNameTiny = product.name.toLowerCase();
+      return productNameTiny.search(tinyValue) !== -1;
+    });
+
+    setCatalog(valueSearch);
+  };
+
   return (
     <AppStyled className="zelty-restaurant">
       <header>
@@ -48,11 +61,11 @@ function App() {
       </header>
       <div className="zelty-restaurant__content">
         <div className="zelty-restaurant__content__left">
-          <SearchInput />
+          <SearchInput onSearch={onSearch} />
           <Menu />
           Liste des produits
           <div className="zelty-restaurant__products">
-            {productWithMenu && <Card products={productWithMenu} />}
+            {catalog && <Card products={catalog} />}
           </div>
         </div>
         <div className="zelty-restaurant__content__right">
