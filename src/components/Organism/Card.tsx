@@ -15,12 +15,11 @@ export const Card = ({ products }: CardProps) => {
   const setLocalOrder = useSetRecoilState(localOrderState);
   const localOrder = useRecoilValue(localOrderState);
 
-  console.log("localOrder", localOrder);
-  const addProduct = (product: Product, quantity = 1) => {
+  const addProduct = (product: Product) => {
     const productAlreadyInBasket = find(localOrder, ["id", product.id]);
 
     if (productAlreadyInBasket) {
-      product.quantity = quantity + 1;
+      product.quantity += 1;
     }
     console.log("productAlreadyInBasket", productAlreadyInBasket);
 
@@ -34,6 +33,7 @@ export const Card = ({ products }: CardProps) => {
           <div className="zelty-card__container">
             <h3>{product.name}</h3>
             <div className="zelty-card__tag-price">
+              <p>{product.quantity}</p>
               {convertPrice(product.price)}
             </div>
 

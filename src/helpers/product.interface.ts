@@ -8,4 +8,5 @@ export interface Product {
   available_options: string[]; // Les options disponibles
   sold_out: boolean; // Le produit n'est pas en stock
   quantity: number;
+  menuName: string;
 }

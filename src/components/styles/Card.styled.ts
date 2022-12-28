@@ -34,24 +34,24 @@ export const CardStyled = styled.div`
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
       white-space: normal;
+      font-style: italic;
     }
 
     &__tag-price {
       border-radius: 50%;
-      width: 22px;
-      height: 22px;
-      font-weight: 600;
+      width: 24px;
+      height: 24px;
+      font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-
       background-color: var(--primary);
       color: white;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       position: absolute;
       top: 0;
       right: 0;
-      padding: 0.4rem;
+      padding: 0.5rem;
     }
   }
 `;

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import { AppStyled } from "./App.styled";
 
-import { authentification } from "./api/auth";
 import { useQuery } from "react-query";
 
 import { getProducts } from "./api/getProducts";
@@ -16,19 +15,9 @@ import { Product } from "./helpers/product.interface";
 import { find } from "lodash";
 
 function App() {
-  const { data: access_token } = useQuery(["auth"], authentification);
-  localStorage.setItem("access_token", access_token?.access_token);
-
-  const token = localStorage.getItem("access_token");
-  const { data: products } = useQuery(["products"], getProducts, {
-    enabled: !!token,
-  });
-  const { data: menus } = useQuery(["menus"], getMenus, {
-    enabled: !!token,
-  });
-  const { data: options } = useQuery(["options"], getOptions, {
-    enabled: !!token,
-  });
+  const { data: products } = useQuery(["products"], getProducts);
+  const { data: menus } = useQuery(["menus"], getMenus);
+  const { data: options } = useQuery(["options"], getOptions);
 
   const productWithMenu =
     products &&
@@ -41,7 +30,10 @@ function App() {
       };
     });
 
-  const [catalog, setCatalog] = useState(productWithMenu);
+  const [catalog, setCatalog] = useState([]);
+  const [activeBadge, setActiveBadge] = useState("");
+
+  useEffect(() => setCatalog(productWithMenu), [products]);
 
   const onSearch = (value: string) => {
     const tinyValue = value.toLowerCase();
@@ -54,6 +46,14 @@ function App() {
     setCatalog(valueSearch);
   };
 
+  const onFilter = (value: string) => {
+    const badgeFilter = productWithMenu.filter(
+      (product: Product) => value === product.menuName
+    );
+    setActiveBadge(value);
+    setCatalog(badgeFilter);
+  };
+
   return (
     <AppStyled className="zelty-restaurant">
       <header>
@@ -62,7 +62,11 @@ function App() {
       <div className="zelty-restaurant__content">
         <div className="zelty-restaurant__content__left">
           <SearchInput onSearch={onSearch} />
-          <Menu />
+          <Menu
+            menus={menus || []}
+            onFilter={onFilter}
+            activeBadge={activeBadge}
+          />
           Liste des produits
           <div className="zelty-restaurant__products">
             {catalog && <Card products={catalog} />}
