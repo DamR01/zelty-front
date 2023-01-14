@@ -34,9 +34,12 @@ export const CartStyled = styled.div`
       &__container {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: space-between;
       }
       &__label {
+        margin-left: 0.5rem;
+      }
+      &__quantity {
         margin-left: 0.5rem;
       }
       &__empty {

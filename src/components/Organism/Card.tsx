@@ -15,15 +15,23 @@ export const Card = ({ products }: CardProps) => {
   const setLocalOrder = useSetRecoilState(localOrderState);
   const localOrder = useRecoilValue(localOrderState);
 
+  console.log("localOrder", localOrder);
+
   const addProduct = (product: Product) => {
-    const productAlreadyInBasket = find(localOrder, ["id", product.id]);
-
-    if (productAlreadyInBasket) {
-      product.quantity += 1;
+    if (!localOrder.length) {
+      return setLocalOrder([{ ...product, quantity: 1 }]);
     }
-    console.log("productAlreadyInBasket", productAlreadyInBasket);
 
-    setLocalOrder((prevState) => [...prevState, product]);
+    localOrder.forEach((item: any) => {
+      if (item.menuId === product.menuId) {
+        console.log("same");
+        return setLocalOrder(() => [{ ...item, quantity: item.quantity + 1 }]);
+      }
+      return setLocalOrder((prevState) => [
+        ...prevState,
+        { ...product, quantity: 1 },
+      ]);
+    });
   };
 
   return (

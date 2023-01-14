@@ -4,21 +4,14 @@ import { Button } from "../Atoms/Button";
 import { useRecoilValue } from "recoil";
 import localOrderState from "../../atoms/localOrder.atom";
 import { convertPrice } from "../../utils/convertPrice";
-import { useNavigate } from "react-router-dom";
 
 interface CartProps {
   onSubmit?(): void;
 }
 export const Cart = ({ onSubmit }: CartProps) => {
-  const history = useNavigate();
-
   const localOrder = useRecoilValue(localOrderState);
 
   const totalBasket = localOrder.reduce((total, item) => total + item.price, 0);
-
-  const handleSubmitOrder = () => {
-    history("/checkout");
-  };
 
   return (
     <CartStyled className="zelty-restaurant__cart">
@@ -48,6 +41,10 @@ export const Cart = ({ onSubmit }: CartProps) => {
               />
               <p className="zelty-restaurant__cart__items__label">
                 {item.name}
+
+              </p>
+              <p className="zelty-restaurant__cart__items__quantity">
+               x{item.quantity}
               </p>
               <p className="zelty-restaurant__cart__items__label">
                 {convertPrice(item.price)}
@@ -61,7 +58,7 @@ export const Cart = ({ onSubmit }: CartProps) => {
           <span className="label">Total</span>
           <span className="price">{convertPrice(totalBasket)}</span>
         </div>
-        <Button onClick={handleSubmitOrder} disabled={!localOrder.length}>
+        <Button onClick={onSubmit} disabled={!localOrder.length}>
           Commander
         </Button>
       </div>

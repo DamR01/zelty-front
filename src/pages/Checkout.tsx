@@ -3,12 +3,22 @@ import { Input } from "../components/Atoms/Input";
 import { Cart } from "../components/Organism/Cart";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import {useRecoilValue} from "recoil";
+import localOrderState from "../atoms/localOrder.atom";
 
 export const Checkout = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data: any) => console.log("data", data);
+  const localOrder = useRecoilValue(localOrderState);
+  const onSubmit = (data: any) => {
+
+    const orderObjet = {
+      customer: data,
+      order:localOrder
+    }
+    console.log('orderObjet',orderObjet );
+  };
   return (
-    <form>
+    <form >
       <CheckoutStyled>
         <div>
           <Link to={"/"} className="zelty-checkout__back-link">
@@ -42,7 +52,7 @@ export const Checkout = () => {
             </div>
           </div>
         </div>
-        <Cart onSubmit={handleSubmit(onSubmit)} />
+        <Cart onSubmit={handleSubmit(onSubmit)}/>
       </CheckoutStyled>
     </form>
   );
