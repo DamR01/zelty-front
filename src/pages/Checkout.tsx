@@ -3,22 +3,22 @@ import { Input } from "../components/Atoms/Input";
 import { Cart } from "../components/Organism/Cart";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import {useRecoilValue} from "recoil";
+import { useRecoilValue } from "recoil";
 import localOrderState from "../atoms/localOrder.atom";
 
 export const Checkout = () => {
   const { register, handleSubmit } = useForm();
   const localOrder = useRecoilValue(localOrderState);
-  const onSubmit = (data: any) => {
 
+  const onSubmit = (data: any) => {
     const orderObjet = {
       customer: data,
-      order:localOrder
-    }
-    console.log('orderObjet',orderObjet );
+      order: localOrder,
+    };
+    console.log("orderObjet", orderObjet);
   };
   return (
-    <form >
+    <form>
       <CheckoutStyled>
         <div>
           <Link to={"/"} className="zelty-checkout__back-link">
@@ -30,29 +30,29 @@ export const Checkout = () => {
               <Input
                 type="text"
                 placeholder="Prénom"
-                register={{ ...register("firstName") }}
+                register={{ ...register("firstName", { required: true }) }}
               />
               <Input
                 type="email"
                 placeholder="Email"
-                register={{ ...register("email") }}
+                register={{ ...register("email", { required: true }) }}
               />
             </div>
             <div className="zelty-checkout__customer-input">
               <Input
                 type="text"
                 placeholder="Nom"
-                register={{ ...register("name") }}
+                register={{ ...register("name", { required: true }) }}
               />
               <Input
                 type="phone"
                 placeholder="Téléphone"
-                register={{ ...register("phone") }}
+                register={{ ...register("phone", { required: true }) }}
               />
             </div>
           </div>
         </div>
-        <Cart onSubmit={handleSubmit(onSubmit)}/>
+        <Cart onSubmit={handleSubmit(onSubmit)} />
       </CheckoutStyled>
     </form>
   );

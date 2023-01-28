@@ -24,18 +24,8 @@ function App() {
   const productWithMenu =
     products &&
     products?.map((item: Product) => {
-      const menuName = menus && find(menus, ["id", item.menuId]);
+      const menuName = find(menus, ["id", item.menuId]);
 
-      // const opt = options?.map((opti: any) => opti.items);
-      //
-      // const fin = opt?.map((finOpt: any) => {
-      //   console.log("finOpt", finOpt);
-      //   item.available_options?.map((itemOpt: any) => {
-      //     console.log("itemOpt", itemOpt);
-      //     return find(finOpt, ["id", itemOpt.id]);
-      //   });
-      // });
-      // console.log("fin", fin);
       return {
         ...item,
         menuName: menuName.name,
@@ -44,7 +34,7 @@ function App() {
   const [catalog, setCatalog] = useState([]);
   const [activeBadge, setActiveBadge] = useState("");
 
-  useEffect(() => setCatalog(productWithMenu), [products]);
+  useEffect(() => setCatalog(productWithMenu), [products, menus, options]);
 
   const onSearch = (value: string) => {
     const tinyValue = value.toLowerCase();
@@ -83,7 +73,7 @@ function App() {
           />
           Liste des produits
           <div className="zelty-restaurant__products">
-            {catalog && <Card products={catalog} />}
+            {catalog && <Card products={catalog} options={options} />}
           </div>
         </div>
         <div className="zelty-restaurant__content__right">

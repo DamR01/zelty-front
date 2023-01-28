@@ -1,9 +1,15 @@
 import { atom } from "recoil";
-import { Product } from "../helpers/product.interface";
 
+export interface OrderItem {
+  id: string;
+  quantity: number;
+  name: string;
+  available_options?: string[];
+  image: string;
+  price: number;
+}
 
-
-const localOrderState = atom<Product[]>({
+const localOrderState = atom<OrderItem[]>({
   key: "localOrder",
   default: [],
 });

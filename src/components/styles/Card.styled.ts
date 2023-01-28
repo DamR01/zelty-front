@@ -9,7 +9,8 @@ export const CardStyled = styled.div`
   width: 100%;
 
   &:hover {
-    box-shadow: 0 0 12px 6px var(--primary);
+    box-shadow: 0 0 2px 4px var(--primary);
+    transform: scale(1.02);
   }
 
   @media (max-width: 769px) {

@@ -38,9 +38,12 @@ export const CartStyled = styled.div`
       }
       &__label {
         margin-left: 0.5rem;
+        font-weight: 600;
       }
       &__quantity {
         margin-left: 0.5rem;
+        font-weight: 600;
+        color: var(--primary);
       }
       &__empty {
         text-align: center;

@@ -41,10 +41,9 @@ export const Cart = ({ onSubmit }: CartProps) => {
               />
               <p className="zelty-restaurant__cart__items__label">
                 {item.name}
-
               </p>
               <p className="zelty-restaurant__cart__items__quantity">
-               x{item.quantity}
+                x{item.quantity}
               </p>
               <p className="zelty-restaurant__cart__items__label">
                 {convertPrice(item.price)}

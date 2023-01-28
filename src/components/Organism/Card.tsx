@@ -2,36 +2,43 @@ import { CardStyled } from "../styles/Card.styled";
 import { Button } from "../Atoms/Button";
 import { Product } from "../../helpers/product.interface";
 
-import localOrderState from "../../atoms/localOrder.atom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import localOrderState, { OrderItem } from "../../atoms/localOrder.atom";
+import { useRecoilState } from "recoil";
 import { convertPrice } from "../../utils/convertPrice";
-import { find } from "lodash";
+import { Option } from "../../helpers/option.interface";
 
 interface CardProps {
   products: Product[];
+  options: Option;
 }
 
 export const Card = ({ products }: CardProps) => {
-  const setLocalOrder = useSetRecoilState(localOrderState);
-  const localOrder = useRecoilValue(localOrderState);
+  const [localOrder, setLocalOrder] = useRecoilState(localOrderState);
 
-  console.log("localOrder", localOrder);
-
-  const addProduct = (product: Product) => {
-    if (!localOrder.length) {
-      return setLocalOrder([{ ...product, quantity: 1 }]);
+  const addProduct = (product: OrderItem) => {
+    const productIndex = localOrder.findIndex(({ id }) => id === product.id);
+    const { id, price, name, image } = product;
+    if (productIndex === -1) {
+      return setLocalOrder([
+        ...localOrder,
+        { id, price, image, name, quantity: 1 },
+      ]);
     }
 
-    localOrder.forEach((item: any) => {
-      if (item.menuId === product.menuId) {
-        console.log("same");
-        return setLocalOrder(() => [{ ...item, quantity: item.quantity + 1 }]);
+    const updatedCart = localOrder.map((item, index) => {
+      if (productIndex === index) {
+        const newQuantity = item.quantity + 1;
+
+        return {
+          ...item,
+          quantity: newQuantity,
+        };
       }
-      return setLocalOrder((prevState) => [
-        ...prevState,
-        { ...product, quantity: 1 },
-      ]);
+
+      return item;
     });
+
+    setLocalOrder(updatedCart);
   };
 
   return (
