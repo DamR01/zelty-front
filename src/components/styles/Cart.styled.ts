@@ -6,6 +6,7 @@ export const CartStyled = styled.div`
   padding: 1rem 0.8rem;
   box-sizing: border-box;
   box-shadow: 0 0 15px 9px rgba(0, 0, 0, 0.03);
+  min-width: 320px;
 
   .zelty-restaurant__cart {
     &__head {
@@ -32,16 +33,15 @@ export const CartStyled = styled.div`
       flex-direction: column;
       padding: 1rem 0.5rem;
       &__container {
-        display: flex;
+        display: grid;
+        grid-template-columns: 10% 60% 10% 10%;
+        gap: 10px;
         align-items: center;
-        justify-content: space-between;
       }
       &__label {
-        margin-left: 0.5rem;
         font-weight: 600;
       }
       &__quantity {
-        margin-left: 0.5rem;
         font-weight: 600;
         color: var(--primary);
       }

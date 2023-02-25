@@ -1,28 +1,21 @@
-import { Button } from "../Atoms/Button";
 import { OptionCardStyled } from "../styles/OptionCard.styled";
+import { Option } from "../../helpers/option.interface";
 
 interface OptionCardProps {
-  id: string;
-  name: string;
+  productOption: Option[];
 }
 
-export const OptionCard = ({ name, id }: OptionCardProps) => {
+export const OptionCard = ({ productOption }: OptionCardProps) => {
   return (
     <>
-      <OptionCardStyled>
-        <div className="zelty-card__container">
-          <input type="checkbox" />
-          <label>{name}</label>
-
-          <Button
-            onClick={() => {
-              //
-            }}
-          >
-            Ajouter
-          </Button>
-        </div>
-      </OptionCardStyled>
+      {productOption.map((option) => (
+        <OptionCardStyled>
+          <div className="zelty-option-card__container">
+            <input type="checkbox" />
+            <label>{option.name}</label>
+          </div>
+        </OptionCardStyled>
+      ))}
     </>
   );
 };
