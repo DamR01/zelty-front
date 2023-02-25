@@ -12,6 +12,7 @@ export const OptionCard = ({ name, id }: OptionCardProps) => {
       <OptionCardStyled>
         <div className="zelty-card__container">
           <input type="checkbox" />
+          <label>{name}</label>
 
           <Button
             onClick={() => {
